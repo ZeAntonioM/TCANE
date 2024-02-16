@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
-  productGUID: b40d8ec8c9dd68c4abbc6d3f92f722a1
+  productGUID: f857ee0d041c9bf449a9007229304ab0
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: TCANE
+  productName: TCANE-PI
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -851,14 +851,14 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: TCANE
+  metroPackageName: TCANE-PI
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: TCANE
+  metroApplicationDescription: TCANE-PI
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -924,13 +924,13 @@ PlayerSettings:
   embeddedLinuxEnableGamepadInput: 1
   hmiLogStartupTiming: 0
   hmiCpuConfiguration: 
-  apiCompatibilityLevel: 3
-  activeInputHandler: 1
+  apiCompatibilityLevel: 6
+  activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: aaac0d9c-95b9-4eb2-a042-5d5736d1181e
+  cloudProjectId: b15465bf-e81f-4f62-a2e2-9dba41de4831
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: TCANE
+  projectName: TCANE-PI
   organizationId: tchas
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
