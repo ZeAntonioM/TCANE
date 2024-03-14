@@ -9,14 +9,14 @@ public class ButtonDown : MonoBehaviour
     public Transform visualTarget;
     public Vector3 localAxis;
     public float resetSpeed = 0.1f;
-    public float followAngleThreshold = 0.45f;
+    public float followAngleThreshold = 45f;
 
     private Vector3 InitialPosition;
 
     private Vector3 offset;
     private Transform pokeAttachTransform;
 
-    private XRBaseInteractor interactable;
+    private XRBaseInteractable interactable;
     private bool isPressed = false;
     private bool freeze = false;
 
@@ -26,7 +26,7 @@ public class ButtonDown : MonoBehaviour
 
         InitialPosition = visualTarget.position;
 
-        interactable = GetComponent<XRBaseInteractor>();
+        interactable = GetComponent<XRBaseInteractable>();
         interactable.hoverEntered.AddListener(Click);
         interactable.hoverExited.AddListener(UnClick);
         interactable.selectEntered.AddListener(Freeze);
