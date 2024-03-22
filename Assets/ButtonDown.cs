@@ -10,7 +10,6 @@ public class ButtonDown : MonoBehaviour
     public Vector3 localAxis;
     public float resetSpeed = 0.1f;
     public float followAngleThreshold = 45f;
-
     private Vector3 InitialPosition;
 
     private Vector3 offset;
@@ -78,4 +77,25 @@ public class ButtonDown : MonoBehaviour
             visualTarget.position = Vector3.Lerp(visualTarget.position, InitialPosition, Time.deltaTime * resetSpeed);
         }
     }
+
+ 
+
+    // “other” refers to the collider on the GameObject inside this trigger
+    void OnTriggerEnter (Collider other)
+    {
+        Debug.Log ("A collider has entered the DoorObject trigger");
+    }
+
+    void OnTriggerStay (Collider other)
+    {
+        Debug.Log ("A collider is inside the DoorObject trigger");
+    }
+    
+    void OnTriggerExit (Collider other)
+    {
+        Debug.Log ("A collider has exited the DoorObject trigger");
+    }
+
+
 }
+
