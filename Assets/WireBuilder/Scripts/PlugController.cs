@@ -24,7 +24,7 @@ public class PlugController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name);
+        //Debug.Log(other.name);
         if (other.gameObject == endAnchor.gameObject)
         {
             isConected = true;
