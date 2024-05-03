@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -8,25 +9,25 @@ using UnityEngine.UIElements;
 public class ButtonClicker : MonoBehaviour
 {
 
-    public GameObject button;
-
     public GameObject TouchCollider;
 
     private bool inCollision = false;
 
     private Vector3 initial_position;
+    private Vector3 bottom_position;
+    private GameObject Parent;
 
-    // RigidBody from the colliding object
-    private Rigidbody colliding_rb;
-
-    private Vector3 button_diff;
 
     // Start is called before the first frame update
     void Start()
     {
-        initial_position = transform.position;
+        Parent = transform.parent.gameObject;
+        initial_position = Parent.transform.position;
 
-        button_diff = transform.position - button.transform.position;
+        bottom_position = new Vector3(initial_position.x, initial_position.y - 0.5f, initial_position.z); 
+
+        
+
     }
 
     void OnCollisionEnter (Collision collision)
@@ -35,7 +36,6 @@ public class ButtonClicker : MonoBehaviour
         if (collision.gameObject.name == TouchCollider.name)
         {
             inCollision = true;
-            colliding_rb = collision.rigidbody;
         }
 
     }
@@ -45,7 +45,6 @@ public class ButtonClicker : MonoBehaviour
         if (collision.gameObject.name == TouchCollider.name)
         {
             inCollision = true;
-            colliding_rb = collision.rigidbody;
         }
 
     }
@@ -55,7 +54,6 @@ public class ButtonClicker : MonoBehaviour
         if (collision.gameObject.name == TouchCollider.name)
         {
             inCollision = false;
-            colliding_rb = null;
         }
     }
 
@@ -63,29 +61,22 @@ public class ButtonClicker : MonoBehaviour
     // Update is called once per frame
      void Update()
     {
-    
-        button.transform.position = transform.position - button_diff;
-
-        Vector3 position = transform.position;
+        Vector3 position = Parent.transform.position;
 
         if (inCollision) {
 
-            float diff = initial_position.y - position.y;
-
-            if ((diff < 1f) && (diff > 0))
+            if ((position.y > bottom_position.y) && (initial_position.y > position.y))
             {
-                transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 100f, 0);
+                transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0.25f, 0);
             }
             else
             {
                 transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
                
-                if (diff >= 1f) {
-                    transform.position = new Vector3(initial_position.x, diff+1f , initial_position.z);
+                if (position.y < bottom_position.y) {
+                    transform.position = new Vector3(initial_position.x, bottom_position.y, initial_position.z);
                 }
-
             }
-
         }
         
         if (!inCollision)
@@ -94,7 +85,7 @@ public class ButtonClicker : MonoBehaviour
             // Get back to initial position
             if (position.y < initial_position.y)
             {
-                transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 1f, 0);
+                transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0.25f, 0);
             }
             // If in initial position, stop moving
             else

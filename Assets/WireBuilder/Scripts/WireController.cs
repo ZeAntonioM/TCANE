@@ -412,6 +412,8 @@ public class WireController : MonoBehaviour
 
     public void DistanceBetweenStartAndEnd()
     {
+        if (endAnchorTemp == null || starAnchorTemp == null)
+            return;
         currentDistanceToStartAnchor = Vector3.Distance(endAnchorTemp.position, starAnchorTemp.position);
 
         if (currentDistanceToStartAnchor > maxDistanceToStarAnchor)

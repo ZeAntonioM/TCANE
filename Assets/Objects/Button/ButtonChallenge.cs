@@ -3,18 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.XR.CoreUtils;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtonChallenge : MonoBehaviour
 {
 
-    public GameObject Top_Left_Button;
-
-    public GameObject Top_Right_Button;
-
-    public GameObject Bottom_Left_Button;
-
-    public GameObject Bottom_Right_Button;
-
+    public GameObject[] Buttons;
     public static int[] correct_order;
 
     public static int clicked_buttons;
@@ -22,6 +16,7 @@ public class ButtonChallenge : MonoBehaviour
     private string color_top_right;
     private string color_bottom_left;
     private string color_bottom_right;
+    private GameObject[] colliders;
 
     // Start is called before the first frame update
     void Start()
@@ -30,13 +25,12 @@ public class ButtonChallenge : MonoBehaviour
         clicked_buttons = 0;
 
         // Obter as cores dos botões
-        color_top_left = Top_Left_Button.GetNamedChild("button").GetComponent<Renderer>().material.name.Split(' ')[0];
-        color_top_right = Top_Right_Button.GetNamedChild("button").GetComponent<Renderer>().material.name.Split(' ')[0];
-        color_bottom_left = Bottom_Left_Button.GetNamedChild("button").GetComponent<Renderer>().material.name.Split(' ')[0];
-        color_bottom_right = Bottom_Right_Button.GetNamedChild("button").GetComponent<Renderer>().material.name.Split(' ')[0];
+        color_top_left = Buttons[0].GetNamedChild("button").GetComponent<Renderer>().material.name.Split(' ')[0];
+        color_top_right = Buttons[1].GetNamedChild("button").GetComponent<Renderer>().material.name.Split(' ')[0];
+        color_bottom_left = Buttons[2].GetNamedChild("button").GetComponent<Renderer>().material.name.Split(' ')[0];
+        color_bottom_right = Buttons[3].GetNamedChild("button").GetComponent<Renderer>().material.name.Split(' ')[0];
 
         // Decidir a ordem em que os botões devem ser pressionados
-        // um botão vermelho
         if (color_top_left == "Red" || color_top_right == "Red" || color_bottom_left == "Red" || color_bottom_right == "Red") {
 
             correct_order = new int[] {2, 1, 3, 4};
@@ -76,7 +70,22 @@ public class ButtonChallenge : MonoBehaviour
 
         }
 
-        Debug.Log(correct_order[0]+ " " + correct_order[1]+ " " + correct_order[2]+ " " + correct_order[3]);
+
+        // Encontrar os colliders dos botões
+        colliders = new GameObject[4];
+        for (int i = 0; i < 4; i++) {
+
+            if (Buttons[i] == null) {
+                Debug.Log("Button " + i + " is null");
+            }
+            else {
+                colliders[i] = Buttons[i].transform.Find("Collider").gameObject;
+                Debug.Log("Collider " + i + " is " + colliders[i].name);
+            }
+
+        }
+
+
 
     }
 
