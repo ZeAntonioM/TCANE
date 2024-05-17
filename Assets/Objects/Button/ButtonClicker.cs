@@ -16,6 +16,7 @@ public class ButtonClicker : MonoBehaviour
     private Vector3 initial_position;
     private Vector3 bottom_position;
     private GameObject Parent;
+    private bool clicked = false;
 
 
     // Start is called before the first frame update
@@ -57,6 +58,16 @@ public class ButtonClicker : MonoBehaviour
         }
     }
 
+    public bool isClicked()
+    {
+        return clicked;
+    }
+
+    public void setClicked(bool value)
+    {
+        clicked = value;
+    }
+
 
     // Update is called once per frame
      void Update()
@@ -67,14 +78,14 @@ public class ButtonClicker : MonoBehaviour
 
             if ((position.y > bottom_position.y) && (initial_position.y > position.y))
             {
-                transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0.25f, 0);
+                Parent.transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, -0.25f, 0);
             }
             else
             {
-                transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                Parent.transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
                
                 if (position.y < bottom_position.y) {
-                    transform.position = new Vector3(initial_position.x, bottom_position.y, initial_position.z);
+                    Parent.transform.position = new Vector3(initial_position.x, bottom_position.y, initial_position.z);
                 }
             }
         }
@@ -85,16 +96,19 @@ public class ButtonClicker : MonoBehaviour
             // Get back to initial position
             if (position.y < initial_position.y)
             {
-                transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0.25f, 0);
+                Parent.transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0.25f, 0);
             }
             // If in initial position, stop moving
             else
             {
-                transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                transform.position = initial_position;
+                Parent.transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                Parent.transform.position = initial_position;
             }
         }
 
+        if (Parent.transform.position.y == bottom_position[1]) {
+            clicked = true;
+        }
     
     }
 }
