@@ -16,18 +16,16 @@ public class ButtonClicker : MonoBehaviour
     private Vector3 initial_position;
     private Vector3 bottom_position;
     private GameObject Parent;
+    private bool clicked = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
-
-        Debug.Log(transform.position);
-
         Parent = transform.parent.gameObject;
         initial_position = Parent.transform.position;
 
-        bottom_position = new Vector3(initial_position.x, initial_position.y - 5f, initial_position.z); 
+        bottom_position = new Vector3(initial_position.x, initial_position.y - 0.5f, initial_position.z); 
 
         
 
@@ -54,12 +52,20 @@ public class ButtonClicker : MonoBehaviour
     
     void OnCollisionExit (Collision collision)
     {
-
-        Debug.Log("Fora");
         if (collision.gameObject.name == TouchCollider.name)
         {
             inCollision = false;
         }
+    }
+
+    public bool isClicked()
+    {
+        return clicked;
+    }
+
+    public void setClicked(bool value)
+    {
+        clicked = value;
     }
 
 
@@ -68,21 +74,18 @@ public class ButtonClicker : MonoBehaviour
     {
         Vector3 position = Parent.transform.position;
 
-        Debug.Log(transform.position);
-
         if (inCollision) {
-
 
             if ((position.y > bottom_position.y) && (initial_position.y > position.y))
             {
-                transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, -1f, 0);
+                Parent.transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, -0.25f, 0);
             }
             else
             {
-                transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                Parent.transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
                
                 if (position.y < bottom_position.y) {
-                    transform.position = new Vector3(initial_position.x, bottom_position.y, initial_position.z);
+                    Parent.transform.position = new Vector3(initial_position.x, bottom_position.y, initial_position.z);
                 }
             }
         }
@@ -93,16 +96,19 @@ public class ButtonClicker : MonoBehaviour
             // Get back to initial position
             if (position.y < initial_position.y)
             {
-                transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 1, 0);
+                Parent.transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0.25f, 0);
             }
             // If in initial position, stop moving
             else
             {
-                transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                transform.position = initial_position;
+                Parent.transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                Parent.transform.position = initial_position;
             }
         }
 
+        if (Parent.transform.position.y == bottom_position[1]) {
+            clicked = true;
+        }
     
     }
 }

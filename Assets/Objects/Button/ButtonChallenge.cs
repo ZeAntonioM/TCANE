@@ -9,14 +9,14 @@ public class ButtonChallenge : MonoBehaviour
 {
 
     public GameObject[] Buttons;
+    public static bool exploded = false;
+    private GameObject[] colliders;
     public static int[] correct_order;
-
     public static int clicked_buttons;
     private string color_top_left; 
     private string color_top_right;
     private string color_bottom_left;
     private string color_bottom_right;
-    private GameObject[] colliders;
 
     // Start is called before the first frame update
     void Start()
@@ -123,6 +123,41 @@ public class ButtonChallenge : MonoBehaviour
         }
 
         correct_order = sorted_buttons;
+
+    }
+
+    void set_greenLight(GameObject button) {
+
+        GameObject light = button.GetNamedChild("Light");
+        light.GetComponent<Renderer>().material = Resources.Load("Materials/GreenLight", typeof(Material)) as Material;
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+        // Go though all the buttons and check if they were clicked
+        for (int i = 0; i < 4; i++) {
+
+            GameObject button = Buttons[i];
+
+            if (colliders[i].GetComponent<ButtonClicker>().isClicked()) {
+
+                if (i+1 == correct_order[clicked_buttons]) {
+                    clicked_buttons++;
+                    set_greenLight(button);
+                }
+                else {
+                    exploded = true;
+                    Debug.Log("Wrong button clicked");
+                }
+
+                break;
+
+            }
+
+        }
 
     }
 
