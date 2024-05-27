@@ -142,7 +142,7 @@ public class ButtonChallenge : MonoBehaviour
 
             GameObject button = Buttons[i];
 
-            if (colliders[i].GetComponent<ButtonClicker>().isClicked()) {
+            if (colliders[i].GetComponent<ButtonClicker>().IsClicked()) {
 
                 if (i+1 == correct_order[clicked_buttons]) {
                     clicked_buttons++;
