@@ -9,26 +9,28 @@ public class ButtonChallenge : MonoBehaviour
 {
 
     public GameObject[] Buttons;
-    public static bool exploded = false;
     private GameObject[] colliders;
     public static int[] correct_order;
-    public static int clicked_buttons;
+    private static int n_clicked_buttons;
+    private static List<GameObject> clicked_buttons = new List<GameObject>();
     private string color_top_left; 
     private string color_top_right;
     private string color_bottom_left;
     private string color_bottom_right;
+    public static bool exploded = false;
+    public static bool solved = false;
 
     // Start is called before the first frame update
     void Start()
     {
 
-        clicked_buttons = 0;
+        n_clicked_buttons = 0;
 
         // Obter as cores dos botões
-        color_top_left = Buttons[0].GetNamedChild("button").GetComponent<Renderer>().material.name.Split(' ')[0];
-        color_top_right = Buttons[1].GetNamedChild("button").GetComponent<Renderer>().material.name.Split(' ')[0];
-        color_bottom_left = Buttons[2].GetNamedChild("button").GetComponent<Renderer>().material.name.Split(' ')[0];
-        color_bottom_right = Buttons[3].GetNamedChild("button").GetComponent<Renderer>().material.name.Split(' ')[0];
+        color_top_left = Buttons[0].GetComponent<Renderer>().material.name.Split(' ')[0];
+        color_top_right = Buttons[1].GetComponent<Renderer>().material.name.Split(' ')[0];
+        color_bottom_left = Buttons[2].GetComponent<Renderer>().material.name.Split(' ')[0];
+        color_bottom_right = Buttons[3].GetComponent<Renderer>().material.name.Split(' ')[0];
 
         // Decidir a ordem em que os botões devem ser pressionados
         if (color_top_left == "Red" || color_top_right == "Red" || color_bottom_left == "Red" || color_bottom_right == "Red") {
@@ -70,6 +72,8 @@ public class ButtonChallenge : MonoBehaviour
 
         }
 
+        Debug.Log("Correct order: " + correct_order[0] + " " + correct_order[1] + " " + correct_order[2] + " " + correct_order[3]);
+
 
         // Encontrar os colliders dos botões
         colliders = new GameObject[4];
@@ -80,7 +84,6 @@ public class ButtonChallenge : MonoBehaviour
             }
             else {
                 colliders[i] = Buttons[i].transform.Find("Collider").gameObject;
-                Debug.Log("Collider " + i + " is " + colliders[i].name);
             }
 
         }
@@ -129,28 +132,46 @@ public class ButtonChallenge : MonoBehaviour
     void set_greenLight(GameObject button) {
 
         GameObject light = button.GetNamedChild("Light");
-        light.GetComponent<Renderer>().material = Resources.Load("Materials/GreenLight", typeof(Material)) as Material;
+        light.GetComponent<Renderer>().material = Resources.Load("Color Materials/GreenLight", typeof(Material)) as Material;
 
+    }
+    
+    public bool IsExploded() {
+        return exploded;
+    }
+
+    public bool IsSolved() {
+        return solved;
     }
 
     // Update is called once per frame
     void Update()
     {
         
-        // Go though all the buttons and check if they were clicked
+        // Go though all the buttons and check if they were clicked. 
+        // If a button has been clicked before, ignore it.
         for (int i = 0; i < 4; i++) {
 
             GameObject button = Buttons[i];
 
+            if (clicked_buttons.Contains(button)) {
+                continue;
+            }
+
             if (colliders[i].GetComponent<ButtonClicker>().IsClicked()) {
 
-                if (i+1 == correct_order[clicked_buttons]) {
-                    clicked_buttons++;
+                Debug.Log("Button " + (i+1) + " clicked");
+
+                if (i+1 == correct_order[n_clicked_buttons]) {
+                    clicked_buttons.Add(button);
+                    n_clicked_buttons++;
                     set_greenLight(button);
+                    if (n_clicked_buttons == 4) {
+                        solved = true;
+                    }
                 }
                 else {
                     exploded = true;
-                    Debug.Log("Wrong button clicked");
                 }
 
                 break;

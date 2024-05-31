@@ -25,7 +25,7 @@ public class ButtonClicker : MonoBehaviour
         Parent = transform.parent.gameObject;
         initial_position = Parent.transform.position;
 
-        bottom_position = new Vector3(initial_position.x, initial_position.y - 0.75f, initial_position.z); 
+        bottom_position = new Vector3(initial_position.x, initial_position.y - 0.25f, initial_position.z); 
 
     }
 
@@ -77,7 +77,6 @@ public class ButtonClicker : MonoBehaviour
             if ((position.y > bottom_position.y) && (initial_position.y >= position.y))
             {
                 Parent.transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, -0.5f, 0);
-                Debug.Log(Parent.transform.gameObject.GetComponent<Rigidbody>().velocity);
             }
             else
             {
@@ -100,7 +99,6 @@ public class ButtonClicker : MonoBehaviour
             if (position.y < initial_position.y)
             {
                 Parent.transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 2f, 0);
-                Debug.Log(Parent.transform.gameObject.GetComponent<Rigidbody>().velocity);
             }
             // If in initial position, stop moving
             else
