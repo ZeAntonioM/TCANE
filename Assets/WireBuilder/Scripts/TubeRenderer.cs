@@ -1,6 +1,7 @@
 // Author: Mathias Soeholm
 // Date: 05/10/2016
 // No license, do whatever you want with this script
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -67,6 +68,21 @@ public class TubeRenderer : MonoBehaviour
 	{
 		_positions = positions;
 		GenerateMesh();
+	}
+
+	public void RemovePosition(Vector3 position) {
+
+		Vector3[] newPositions = new Vector3[_positions.Length - 1];
+
+		foreach (Vector3 pos in _positions) {
+			if (pos != position) {
+				newPositions.Append(pos);
+			}
+		}
+
+		_positions = newPositions;
+		GenerateMesh();
+
 	}
 
 	private void GenerateMesh()
