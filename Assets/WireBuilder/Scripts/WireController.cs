@@ -106,7 +106,7 @@ public class WireController : MonoBehaviour
 #endif
 
 
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
     private void Start()
     {
         mousePossHelper.gameObject.SetActive(false);
