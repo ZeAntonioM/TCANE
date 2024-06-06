@@ -29,7 +29,7 @@ public class VWireChallenge : MonoBehaviour
             hasBeenCut.Add(false);
 
             //Check Wire color
-            string color = wire.transform.Find("WireRender").GetComponent<Renderer>().material.name.Split(' ')[0];
+            string color = wire.transform.Find("./WireRender").GetComponent<Renderer>().material.name.Split(' ')[0];
 
             // Count the number of wires of each color
             if (color == "Red") redCount++;
@@ -45,7 +45,7 @@ public class VWireChallenge : MonoBehaviour
             GameObject wire = wires[i];
 
             //Check Wire color
-            string color = wire.GetNamedChild("WireRender").GetComponent<Renderer>().material.name.Split(' ')[0];
+            string color = wire.transform.Find("./WireRender").GetComponent<Renderer>().material.name.Split(' ')[0];
 
             // Go through all rules
             if (color == "Red") cut_wires.Add( wires.Length % 2 == 1 ? true : false );

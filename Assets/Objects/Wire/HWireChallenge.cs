@@ -26,7 +26,7 @@ public class HWireChallenge : MonoBehaviour
         
         for (int i = 0; i < 4; i++) {
 
-            string color = wires[i].GetNamedChild("WireRender").GetComponent<Renderer>().material.name.Split(' ')[0];
+            string color = wires[i].transform.Find("./WireRender").GetComponent<Renderer>().material.name.Split(' ')[0];
 
             colors[i] = color;
 
