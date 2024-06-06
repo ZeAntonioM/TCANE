@@ -135,14 +135,7 @@ public class ButtonChallenge : MonoBehaviour
         light.GetComponent<Renderer>().material = Resources.Load("Color Materials/GreenLight", typeof(Material)) as Material;
 
     }
-    
-    public bool IsExploded() {
-        return exploded;
-    }
 
-    public bool IsSolved() {
-        return solved;
-    }
 
     // Update is called once per frame
     void Update()
