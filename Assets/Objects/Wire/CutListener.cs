@@ -30,6 +30,7 @@ public class CutListener : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Collision");
         if (collision.gameObject == HapticCollider)
         {
             if (!isCut) {
@@ -54,6 +55,12 @@ public class CutListener : MonoBehaviour
     public bool IsCut()
     {
         return isCut;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 
 }

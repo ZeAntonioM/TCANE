@@ -26,8 +26,8 @@ public class HWireChallenge : MonoBehaviour
         
         for (int i = 0; i < 4; i++) {
 
-            string color = wires[i].transform.Find("./WireRender").GetComponent<Renderer>().material.name.Split(' ')[0];
-
+            string color = wires[i].transform.Find("WireRender").GetComponent<Renderer>().material.name.Split(' ')[0];
+                
             colors[i] = color;
 
             if (color == "Red") redCount++;
@@ -49,11 +49,13 @@ public class HWireChallenge : MonoBehaviour
             bool blueCheck = false;
 
             for (int i = 0; i < 4; i++) {
-                if(blueCheck) {
-                    wireToCut = wires[i];
-                    break;
+                if (colors[i] == "Blue") {
+                    if(blueCheck) {
+                        wireToCut = wires[i];
+                        break;
+                    }
+                    blueCheck = true;
                 }
-                blueCheck = true;
             }
         }
         else if (yellowCount == 1) {
@@ -77,6 +79,8 @@ public class HWireChallenge : MonoBehaviour
         else if (colors[0] == colors[1]) wireToCut = wires[1];
         else if (colors[3] == "Red") wireToCut = wires[2];
         else wireToCut = wires[0];
+
+        Debug.Log("Wire to cut: " + wireToCut.name);
 
     }
 

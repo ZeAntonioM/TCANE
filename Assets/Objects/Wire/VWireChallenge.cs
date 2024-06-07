@@ -7,9 +7,9 @@ public class VWireChallenge : MonoBehaviour
 
     public GameObject[] wires;
 
-    private static List<bool> cut_wires;
+    private static List<bool> cut_wires = new List<bool>();
 
-    private List<bool> hasBeenCut; 
+    private List<bool> hasBeenCut = new List<bool>(); 
     private int cutCount = 0;
 
     public static bool exploded = false;
@@ -27,10 +27,12 @@ public class VWireChallenge : MonoBehaviour
         for (int i = 0; i < wires.Length ; i++) {
 
             GameObject wire = wires[i];
+
+            // Initialize hasBeenCut list
             hasBeenCut.Add(false);
 
             //Check Wire color
-            string color = wire.transform.Find("./WireRender").GetComponent<Renderer>().material.name.Split(' ')[0];
+            string color = wire.transform.Find("WireRender").GetComponent<Renderer>().material.name.Split(' ')[0];
 
             // Count the number of wires of each color
             if (color == "Red") redCount++;
@@ -46,7 +48,7 @@ public class VWireChallenge : MonoBehaviour
             GameObject wire = wires[i];
 
             //Check Wire color
-            string color = wire.transform.Find("./WireRender").GetComponent<Renderer>().material.name.Split(' ')[0];
+            string color = wire.transform.Find("WireRender").GetComponent<Renderer>().material.name.Split(' ')[0];
 
             // Go through all rules
             if (color == "Red") cut_wires.Add( wires.Length % 2 == 1 ? true : false );
@@ -57,6 +59,8 @@ public class VWireChallenge : MonoBehaviour
             else if (color == "Dark") cut_wires.Add( yellowCount == 0 ? true : false );
             
         }
+
+        Debug.Log("Cut Wires: " + cut_wires);
         
     }
 
