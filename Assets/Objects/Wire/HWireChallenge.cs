@@ -5,7 +5,7 @@ using UnityEngine;
 public class HWireChallenge : MonoBehaviour
 {
 
-    public GameObject[] wires;
+    public GameObject[] wires = new GameObject[4];
     private GameObject wireToCut;
     public static bool exploded = false;
     public static bool solved = false;

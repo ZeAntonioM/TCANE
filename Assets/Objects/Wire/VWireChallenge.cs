@@ -10,6 +10,7 @@ public class VWireChallenge : MonoBehaviour
     private static List<bool> cut_wires;
 
     private List<bool> hasBeenCut; 
+    private int cutCount = 0;
 
     public static bool exploded = false;
     public static bool solved = false;
@@ -68,7 +69,18 @@ public class VWireChallenge : MonoBehaviour
                     
                     hasBeenCut[i] = true;
 
-                    //wire.GetComponent
+                    if (!cut_wires[i]) {
+                        exploded = true;
+                        Debug.Log("Exploded!");
+                    }
+
+                    else {
+                        cutCount++;
+                        if (cutCount == wires.Length) {
+                            solved = true;
+                            Debug.Log("Solved!");
+                        }
+                    }
 
                     break;
                 }
