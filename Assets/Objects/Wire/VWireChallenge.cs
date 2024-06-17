@@ -7,13 +7,13 @@ public class VWireChallenge : MonoBehaviour
 
     public GameObject[] wires;
 
-    private static List<bool> cut_wires = new List<bool>();
+    private List<bool> cut_wires = new List<bool>();
 
     private List<bool> hasBeenCut = new List<bool>(); 
     private int cutCount = 0;
 
-    public static bool exploded = false;
-    public static bool solved = false;
+    public bool exploded = false;
+    public bool solved = false;
 
     // Start is called before the first frame update
     void Start()

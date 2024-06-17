@@ -7,8 +7,8 @@ public class HWireChallenge : MonoBehaviour
 
     public GameObject[] wires = new GameObject[4];
     private GameObject wireToCut;
-    public static bool exploded = false;
-    public static bool solved = false;
+    public bool exploded = false;
+    public bool solved = false;
 
 
     // Start is called before the first frame update
@@ -41,6 +41,7 @@ public class HWireChallenge : MonoBehaviour
 
         //Check rules to decide which wire to cut
         if (redCount == 1) {
+            Debug.Log("Red count: " + redCount);
             if (colors[3] == "Red") wireToCut = wires[3];
             else wireToCut = wires[0];
         }

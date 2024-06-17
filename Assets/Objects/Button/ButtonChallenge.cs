@@ -10,15 +10,15 @@ public class ButtonChallenge : MonoBehaviour
 
     public GameObject[] Buttons;
     private GameObject[] colliders;
-    public static int[] correct_order;
-    private static int n_clicked_buttons;
-    private static List<GameObject> clicked_buttons = new List<GameObject>();
+    public int[] correct_order;
+    private int n_clicked_buttons;
+    private List<GameObject> clicked_buttons = new List<GameObject>();
     private string color_top_left; 
     private string color_top_right;
     private string color_bottom_left;
     private string color_bottom_right;
-    public static bool exploded = false;
-    public static bool solved = false;
+    public bool exploded = false;
+    public bool solved = false;
 
     // Start is called before the first frame update
     void Start()
@@ -165,6 +165,7 @@ public class ButtonChallenge : MonoBehaviour
                 }
                 else {
                     exploded = true;
+                    transform.parent.GetComponent<BombGame>().Explode();
                 }
 
                 break;
