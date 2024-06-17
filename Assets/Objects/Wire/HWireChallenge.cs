@@ -92,6 +92,7 @@ public class HWireChallenge : MonoBehaviour
             }
             else {
                 exploded = true;
+                transform.parent.GetComponent<BombGame>().Explode();
             }
         }
     }

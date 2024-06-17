@@ -38,22 +38,23 @@ public class Timer : MonoBehaviour
         else
         {
             if(showMilliseconds)
-                timerText.text = TimeSpan.FromSeconds(currentSeconds).ToString(@"hh\:mm\:ss\:fff");
+                timerText.text = TimeSpan.FromSeconds(currentSeconds).ToString(@"mm\:ss\:fff");
             else
-                timerText.text = TimeSpan.FromSeconds(currentSeconds).ToString(@"hh\:mm\:ss");
+                timerText.text = TimeSpan.FromSeconds(currentSeconds).ToString(@"mm\:ss");
         }
     }
 
     private void TimeUp()
     {
-        BombGame bombGame = GetComponentInParent<BombGame>();
-        if (bombGame != null)
-        {
-            bombGame.Explode();
-        }
+        /** 
+        * Explode the bomb
+        * This works if the tree structure is maintained: Bomb (with BombGame script) -> Timer (Canvas) -> Timer (Image + This Script) -> TimerText (TextMeshPro)
+        */
+        transform.parent.transform.parent.GetComponent<BombGame>().Explode();
+        
         if (showMilliseconds)
-            timerText.text = "00:00:00:000";
+            timerText.text = "00:00:000";
         else
-            timerText.text = "00:00:00";
+            timerText.text = "00:00";
     }
 }

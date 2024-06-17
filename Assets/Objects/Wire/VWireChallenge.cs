@@ -75,7 +75,7 @@ public class VWireChallenge : MonoBehaviour
 
                     if (!cut_wires[i]) {
                         exploded = true;
-                        Debug.Log("Exploded!");
+                        transform.parent.GetComponent<BombGame>().Explode();
                     }
 
                     else {
