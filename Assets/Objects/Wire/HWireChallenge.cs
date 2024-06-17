@@ -41,7 +41,6 @@ public class HWireChallenge : MonoBehaviour
 
         //Check rules to decide which wire to cut
         if (redCount == 1) {
-            Debug.Log("Red count: " + redCount);
             if (colors[3] == "Red") wireToCut = wires[3];
             else wireToCut = wires[0];
         }

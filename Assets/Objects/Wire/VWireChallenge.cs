@@ -52,15 +52,20 @@ public class VWireChallenge : MonoBehaviour
 
             // Go through all rules
             if (color == "Red") cut_wires.Add( wires.Length % 2 == 1 ? true : false );
-            else if (color == "Blue") cut_wires.Add( i == 3 ? true : false );
-            else if (color == "Green") cut_wires.Add( redCount > 2 ? true : false );
+            else if (color == "Blue") cut_wires.Add( i == 2 ? true : false );
+            else if (color == "Green") cut_wires.Add( redCount > 2 ? false : true );
             else if (color == "Yellow") cut_wires.Add( wires.Length % 3 == 0 ? true : false );
             else if (color == "White") cut_wires.Add( blueCount >= whiteCount ? true : false );
             else if (color == "Dark") cut_wires.Add( yellowCount == 0 ? true : false );
             
         }
 
-        Debug.Log("Cut Wires: " + cut_wires);
+        string log = "Cut wires: ";
+        foreach (bool b in cut_wires) {
+            log += b + " ";
+        }
+        Debug.Log(log);
+
         
     }
 
