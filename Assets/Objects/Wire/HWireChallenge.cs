@@ -63,7 +63,7 @@ public class HWireChallenge : MonoBehaviour
             else wireToCut = wires[2];
         }
         else if (darkCount == 0) wireToCut = wires[2];
-        else if (colors[4] == "White") {
+        else if (colors[3] == "White") {
             if (colors[1] == "Red") wireToCut = wires[0];
             else wireToCut = wires[4];
         }
@@ -87,10 +87,14 @@ public class HWireChallenge : MonoBehaviour
     // Function to be called by CutListener, to tell the script that the wire was cut
     public void CutWire(GameObject wire) {
         if ( !exploded && !solved ) {
+            Debug.Log(wire.name + " cut");
+            Debug.Log(wireToCut.name + " to cut");
             if (wire == wireToCut) {
+                Debug.Log("Wire cut correctly");
                 solved = true;
             }
             else {
+                Debug.Log("Wrong wire cut");
                 exploded = true;
                 transform.parent.GetComponent<BombGame>().Explode();
             }

@@ -31,7 +31,10 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        if((currentSeconds -= Time.deltaTime) <= 0)
+        if (transform.parent.transform.parent.GetComponent<BombGame>().isSolved()) {
+            return;
+        }
+        else if((currentSeconds -= Time.deltaTime) <= 0)
         {
             TimeUp();
         }

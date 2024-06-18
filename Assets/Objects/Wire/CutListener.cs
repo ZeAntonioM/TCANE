@@ -40,11 +40,11 @@ public class CutListener : MonoBehaviour
                     
                     if (challengeType == "VWireChallenge")
                     {
-                        transform.parent.transform.parent.GetComponent<VWireChallenge>().CutWire(gameObject);
+                        transform.parent.transform.parent.GetComponent<VWireChallenge>().CutWire(gameObject.transform.parent.gameObject);
                     }
                     else
                     {
-                        transform.parent.transform.parent.GetComponent<HWireChallenge>().CutWire(gameObject);
+                        transform.parent.transform.parent.GetComponent<HWireChallenge>().CutWire(gameObject.transform.parent.gameObject);
                     }
 
                 }
