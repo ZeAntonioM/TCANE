@@ -4,8 +4,6 @@
 
 Project developed for the [PI](https://sigarra.up.pt/feup/pt/ucurr_geral.ficha_uc_view?pv_ocorrencia_id=520335) course. 
 
----
-
 ## Description
 
 This project aimed to study the impact of haptic feedback on user experience in immersive environments, specifically through a game developed during the course.
